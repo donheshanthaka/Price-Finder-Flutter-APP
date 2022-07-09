@@ -31,6 +31,23 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Price Finder'),
       ),
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            Image.network('https://picsum.photos/250?imaghe=9'),
+            const SizedBox(
+              height: 40,
+            ),
+            FloatingActionButton(
+              onPressed: () {},
+              child: const Icon(Icons.search_rounded),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
