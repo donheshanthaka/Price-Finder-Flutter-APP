@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +28,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  File? _image;
+
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemp = File(image.path);
+
+    setState(() {
+      _image = imageTemp;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +53,19 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 40,
             ),
-            Image.network('https://picsum.photos/250?imaghe=9'),
+            _image != null
+                ? Image.file(
+                    _image!,
+                    width: 250,
+                    height: 250,
+                    fit: BoxFit.cover,
+                  )
+                : Image.network('https://picsum.photos/250?imaghe=9'),
             const SizedBox(
               height: 40,
             ),
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: getImage,
               child: const Icon(Icons.search_rounded),
             )
           ],
