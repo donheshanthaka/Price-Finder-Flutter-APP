@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:http/http.dart' as http;
+import 'package:price_finder/predict_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -97,24 +97,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-predictImage(File file) async {
-  debugPrint(
-      'Image path >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-  debugPrint(file.path);
-
-  var request = http.MultipartRequest(
-      "POST", Uri.parse("https://get-prediction-hezxtblxwq-el.a.run.app"));
-      
-  var multipartFile =
-      await http.MultipartFile.fromPath('imageFile', file.path);
-
-  request.files.add(multipartFile);
-
-  var response = await request.send();
-
-  var responseData = await response.stream.toBytes();
-
-  var result = String.fromCharCodes(responseData);
-
-  print(result);
-}
