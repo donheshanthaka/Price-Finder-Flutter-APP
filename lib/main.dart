@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -46,20 +47,21 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _image = imageSaved;
       });
+      predictImage(imageSaved);
     } on PlatformException catch (e) {
       debugPrint('Failed to display image: $e');
     }
   }
 
-Future<File> saveImage(String imagePath) async {
-  final direcotry = await getApplicationDocumentsDirectory();
-  final name = basename(imagePath);
-  final image = File('${direcotry.path}/$name');
-  debugPrint('direcotry path >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-  debugPrint('${direcotry.path}/$name');
+  Future<File> saveImage(String imagePath) async {
+    final direcotry = await getApplicationDocumentsDirectory();
+    final name = basename(imagePath);
+    final image = File('${direcotry.path}/$name');
+    // debugPrint('direcotry path >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    // debugPrint('${direcotry.path}/$name');
 
-  return File(imagePath).copy(image.path);
-}
+    return File(imagePath).copy(image.path);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,4 +95,26 @@ Future<File> saveImage(String imagePath) async {
       ),
     );
   }
+}
+
+predictImage(File file) async {
+  debugPrint(
+      'Image path >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  debugPrint(file.path);
+
+  var request = http.MultipartRequest(
+      "POST", Uri.parse("https://get-prediction-hezxtblxwq-el.a.run.app"));
+      
+  var multipartFile =
+      await http.MultipartFile.fromPath('imageFile', file.path);
+
+  request.files.add(multipartFile);
+
+  var response = await request.send();
+
+  var responseData = await response.stream.toBytes();
+
+  var result = String.fromCharCodes(responseData);
+
+  print(result);
 }
