@@ -36,9 +36,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? _image;
 
-  Future getImage() async {
+  Future getImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       final imageSaved = await saveImage(image.path);
       setState(() {
@@ -83,20 +83,20 @@ class _HomePageState extends State<HomePage> {
             FloatingActionButton(
               onPressed: () {
                 showCupertinoDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return imageSourceAlertDialog();
-                      // AlertDialog(
-                      //   title: const Text("Image source"),
-                      //   content: const Text("Select the image source"),
-                      //   actions: [
-                      //     TextButton(
-                      //         onPressed: () {}, child: const Text('Camera'))
-                      //   ],
-                      // );
-                    },
-                    barrierDismissible: true,
-                    );
+                  context: context,
+                  builder: (BuildContext context) {
+                    return imageSourceAlertDialog(getImage);
+                    // AlertDialog(
+                    //   title: const Text("Image source"),
+                    //   content: const Text("Select the image source"),
+                    //   actions: [
+                    //     TextButton(
+                    //         onPressed: () {}, child: const Text('Camera'))
+                    //   ],
+                    // );
+                  },
+                  barrierDismissible: true,
+                );
               },
               child: const Icon(Icons.search_rounded),
             )
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-CupertinoAlertDialog imageSourceAlertDialog() {
+CupertinoAlertDialog imageSourceAlertDialog(Function getImage) {
   // Widget camera = OutlinedButton(
   //   onPressed: () {},
   //   style: OutlinedButton.styleFrom(
@@ -119,17 +119,28 @@ CupertinoAlertDialog imageSourceAlertDialog() {
   // Widget gallery = TextButton(onPressed: () {}, child: const Text('Gallery'));
   // Widget camera = TextButton(onPressed: () {}, child: const Text('Camera'));
 
-  var cam = CupertinoDialogAction(child: const Text('Camera'), onPressed: () {print("Camera");});
-  var gal = CupertinoDialogAction(child: const Text('Gallery'), onPressed: () {print("Gallery");});
+  var cam = CupertinoDialogAction(
+      child: const Text('Camera'),
+      onPressed: () {
+        print("Camera");
+        getImage(ImageSource.camera);
+      });
+
+  var gal = CupertinoDialogAction(
+      child: const Text('Gallery'),
+      onPressed: () {
+        print("Gallery");
+        getImage(ImageSource.gallery);
+      });
 
   return CupertinoAlertDialog(
-      title: const Text("Image source"),
-      content: const Text("Select the image source"),
-      //actions: <Widget>[SizedBox(width: double.infinity/2, child: gallery,), SizedBox(width: double.infinity/2, child: camera,)],
-      // actions: <Widget>[gallery, camera],
-      actions: [cam, gal],
-      //actionsAlignment: MainAxisAlignment.spaceEvenly,
-      //backgroundColor: const Color.fromARGB(255, 203, 225, 234),
-      //elevation: 0.25
-      );
+    title: const Text("Image source"),
+    content: const Text("Select the image source"),
+    //actions: <Widget>[SizedBox(width: double.infinity/2, child: gallery,), SizedBox(width: double.infinity/2, child: camera,)],
+    // actions: <Widget>[gallery, camera],
+    actions: [gal, cam],
+    //actionsAlignment: MainAxisAlignment.spaceEvenly,
+    //backgroundColor: const Color.fromARGB(255, 203, 225, 234),
+    //elevation: 0.25
+  );
 }
