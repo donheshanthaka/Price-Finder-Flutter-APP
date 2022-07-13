@@ -7,6 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:price_finder/predict_image.dart';
 
+import 'package:flutter/cupertino.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -38,12 +40,7 @@ class _HomePageState extends State<HomePage> {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
-
-      // final imageTemp = File(image.path);
       final imageSaved = await saveImage(image.path);
-      // debugPrint('Image Location >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-      // debugPrint(image.path);
-
       setState(() {
         _image = imageSaved;
       });
@@ -57,9 +54,6 @@ class _HomePageState extends State<HomePage> {
     final direcotry = await getApplicationDocumentsDirectory();
     final name = basename(imagePath);
     final image = File('${direcotry.path}/$name');
-    // debugPrint('direcotry path >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    // debugPrint('${direcotry.path}/$name');
-
     return File(imagePath).copy(image.path);
   }
 
@@ -87,7 +81,23 @@ class _HomePageState extends State<HomePage> {
               height: 40,
             ),
             FloatingActionButton(
-              onPressed: getImage,
+              onPressed: () {
+                showCupertinoDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return imageSourceAlertDialog();
+                      // AlertDialog(
+                      //   title: const Text("Image source"),
+                      //   content: const Text("Select the image source"),
+                      //   actions: [
+                      //     TextButton(
+                      //         onPressed: () {}, child: const Text('Camera'))
+                      //   ],
+                      // );
+                    },
+                    barrierDismissible: true,
+                    );
+              },
               child: const Icon(Icons.search_rounded),
             )
           ],
@@ -97,3 +107,29 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+CupertinoAlertDialog imageSourceAlertDialog() {
+  // Widget camera = OutlinedButton(
+  //   onPressed: () {},
+  //   style: OutlinedButton.styleFrom(
+  //     primary: Colors.red,
+  //   ),
+  //   child: const Text('Camera'),
+  // );
+
+  // Widget gallery = TextButton(onPressed: () {}, child: const Text('Gallery'));
+  // Widget camera = TextButton(onPressed: () {}, child: const Text('Camera'));
+
+  var cam = CupertinoDialogAction(child: const Text('Camera'), onPressed: () {print("Camera");});
+  var gal = CupertinoDialogAction(child: const Text('Gallery'), onPressed: () {print("Gallery");});
+
+  return CupertinoAlertDialog(
+      title: const Text("Image source"),
+      content: const Text("Select the image source"),
+      //actions: <Widget>[SizedBox(width: double.infinity/2, child: gallery,), SizedBox(width: double.infinity/2, child: camera,)],
+      // actions: <Widget>[gallery, camera],
+      actions: [cam, gal],
+      //actionsAlignment: MainAxisAlignment.spaceEvenly,
+      //backgroundColor: const Color.fromARGB(255, 203, 225, 234),
+      //elevation: 0.25
+      );
+}
