@@ -36,7 +36,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? _image;
 
-  Future getImage(ImageSource source) async {
+  Future getImage(ImageSource source, BuildContext context) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
@@ -44,7 +44,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _image = imageSaved;
       });
-      predictImage(imageSaved);
+      await predictImage(imageSaved);
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) => const Prediction()),
+      );
     } on PlatformException catch (e) {
       debugPrint('Failed to display image: $e');
     }
@@ -85,15 +88,7 @@ class _HomePageState extends State<HomePage> {
                 showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return imageSourceAlertDialog(getImage);
-                    // AlertDialog(
-                    //   title: const Text("Image source"),
-                    //   content: const Text("Select the image source"),
-                    //   actions: [
-                    //     TextButton(
-                    //         onPressed: () {}, child: const Text('Camera'))
-                    //   ],
-                    // );
+                    return imageSourceAlertDialog(getImage, context);
                   },
                   barrierDismissible: true,
                 );
@@ -107,7 +102,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-CupertinoAlertDialog imageSourceAlertDialog(Function getImage) {
+CupertinoAlertDialog imageSourceAlertDialog(Function getImage, BuildContext context) {
   // Widget camera = OutlinedButton(
   //   onPressed: () {},
   //   style: OutlinedButton.styleFrom(
@@ -124,13 +119,15 @@ CupertinoAlertDialog imageSourceAlertDialog(Function getImage) {
       onPressed: () {
         print("Camera");
         getImage(ImageSource.camera);
+        Navigator.of(context, rootNavigator: true).pop();
       });
 
   var gal = CupertinoDialogAction(
       child: const Text('Gallery'),
       onPressed: () {
         print("Gallery");
-        getImage(ImageSource.gallery);
+        getImage(ImageSource.gallery, context);
+        //Navigator.of(context, rootNavigator: true).pop();
       });
 
   return CupertinoAlertDialog(
@@ -143,4 +140,19 @@ CupertinoAlertDialog imageSourceAlertDialog(Function getImage) {
     //backgroundColor: const Color.fromARGB(255, 203, 225, 234),
     //elevation: 0.25
   );
+  
+}
+
+
+class Prediction extends StatelessWidget {
+  const Prediction({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Prediction"),
+      ),
+    );
+  }
 }
