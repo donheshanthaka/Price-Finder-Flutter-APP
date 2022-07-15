@@ -45,9 +45,6 @@ class _HomePageState extends State<HomePage> {
         _image = imageSaved;
       });
       await predictImage(imageSaved);
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) => const Prediction()),
-      );
     } on PlatformException catch (e) {
       debugPrint('Failed to display image: $e');
     }
@@ -102,7 +99,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-CupertinoAlertDialog imageSourceAlertDialog(Function getImage, BuildContext context) {
+CupertinoAlertDialog imageSourceAlertDialog(
+    Function getImage, BuildContext context) {
   // Widget camera = OutlinedButton(
   //   onPressed: () {},
   //   style: OutlinedButton.styleFrom(
@@ -117,17 +115,21 @@ CupertinoAlertDialog imageSourceAlertDialog(Function getImage, BuildContext cont
   var cam = CupertinoDialogAction(
       child: const Text('Camera'),
       onPressed: () {
-        print("Camera");
-        getImage(ImageSource.camera);
+        // print("Camera");
+        getImage(ImageSource.camera, context);
         Navigator.of(context, rootNavigator: true).pop();
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const Prediction()));
       });
 
   var gal = CupertinoDialogAction(
       child: const Text('Gallery'),
       onPressed: () {
-        print("Gallery");
+        // print("Gallery");
         getImage(ImageSource.gallery, context);
-        //Navigator.of(context, rootNavigator: true).pop();
+        Navigator.of(context, rootNavigator: true).pop();
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const Prediction()));
       });
 
   return CupertinoAlertDialog(
@@ -140,9 +142,7 @@ CupertinoAlertDialog imageSourceAlertDialog(Function getImage, BuildContext cont
     //backgroundColor: const Color.fromARGB(255, 203, 225, 234),
     //elevation: 0.25
   );
-  
 }
-
 
 class Prediction extends StatelessWidget {
   const Prediction({Key? key}) : super(key: key);
