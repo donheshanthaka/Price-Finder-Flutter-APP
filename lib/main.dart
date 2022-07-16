@@ -36,15 +36,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? _image;
 
-  Future getImage(ImageSource source, BuildContext context) async {
+  Future<File?> getImage(ImageSource source, BuildContext context) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
+      if (image == null) return null;
       final imageSaved = await saveImage(image.path);
       setState(() {
         _image = imageSaved;
       });
       await predictImage(imageSaved);
+      return _image;
     } on PlatformException catch (e) {
       debugPrint('Failed to display image: $e');
     }
@@ -99,59 +100,71 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+Future<File?> imageFile(Function getImage, BuildContext context) async{
+  final File? image = await getImage(ImageSource.gallery, context);
+  return image;
+}
+
 CupertinoAlertDialog imageSourceAlertDialog(
     Function getImage, BuildContext context) {
-  // Widget camera = OutlinedButton(
-  //   onPressed: () {},
-  //   style: OutlinedButton.styleFrom(
-  //     primary: Colors.red,
-  //   ),
-  //   child: const Text('Camera'),
-  // );
-
-  // Widget gallery = TextButton(onPressed: () {}, child: const Text('Gallery'));
-  // Widget camera = TextButton(onPressed: () {}, child: const Text('Camera'));
-
+  File? image;
   var cam = CupertinoDialogAction(
       child: const Text('Camera'),
       onPressed: () {
         // print("Camera");
-        getImage(ImageSource.camera, context);
+        final File? image = getImage(ImageSource.camera, context);
+        //image = imageFile(getImage, context);
         Navigator.of(context, rootNavigator: true).pop();
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Prediction()));
+            MaterialPageRoute(builder: (context) => Prediction(image: image)));
       });
 
   var gal = CupertinoDialogAction(
       child: const Text('Gallery'),
-      onPressed: () {
+      onPressed: () async {
         // print("Gallery");
-        getImage(ImageSource.gallery, context);
+        final File? image = await getImage(ImageSource.gallery, context);
         Navigator.of(context, rootNavigator: true).pop();
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Prediction()));
+            MaterialPageRoute(builder: (context) => Prediction(image: image,)));
       });
 
   return CupertinoAlertDialog(
     title: const Text("Image source"),
     content: const Text("Select the image source"),
-    //actions: <Widget>[SizedBox(width: double.infinity/2, child: gallery,), SizedBox(width: double.infinity/2, child: camera,)],
-    // actions: <Widget>[gallery, camera],
     actions: [gal, cam],
-    //actionsAlignment: MainAxisAlignment.spaceEvenly,
-    //backgroundColor: const Color.fromARGB(255, 203, 225, 234),
-    //elevation: 0.25
   );
 }
 
 class Prediction extends StatelessWidget {
-  const Prediction({Key? key}) : super(key: key);
+  //Prediction({Key? key}) : super(key: key);
+
+  File? image;
+
+  Prediction({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Prediction"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            image != null
+                ? Image.file(
+                    image!,
+                    width: 250,
+                    height: 250,
+                    fit: BoxFit.cover,
+                  )
+                : Image.network('https://picsum.photos/250?imaghe=9'),
+          ],
+        ),
       ),
     );
   }
