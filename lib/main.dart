@@ -6,8 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:price_finder/predict_image.dart';
-
 import 'package:flutter/cupertino.dart';
+import 'package:price_finder/prediction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -102,7 +102,6 @@ CupertinoAlertDialog imageSourceAlertDialog(
         final File? image = await getImage(ImageSource.camera);
         navigator.pop();
         //navigatorPop.pop();
-        
         if (image != null){
           await navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
@@ -118,14 +117,11 @@ CupertinoAlertDialog imageSourceAlertDialog(
         final File? image = await getImage(ImageSource.gallery);
         navigator.pop();
         //navigatorPop.pop();
-        
         if (image != null){
           await navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
         }
-        
         //navigator.pop();
-        
       });
 
   return CupertinoAlertDialog(
@@ -136,36 +132,4 @@ CupertinoAlertDialog imageSourceAlertDialog(
 }
 
 
-class Prediction extends StatelessWidget {
-  //Prediction({Key? key}) : super(key: key);
 
-  File? image;
-
-  Prediction({Key? key, required this.image}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Prediction"),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 40,
-            ),
-            image != null
-                ? Image.file(
-                    image!,
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  )
-                : Image.network('https://picsum.photos/250?imaghe=9'),
-          ],
-        ),
-      ),
-    );
-  }
-}
