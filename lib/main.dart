@@ -36,7 +36,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? _image;
 
-  Future<File?> getImage(ImageSource source, BuildContext context) async {
+  Future<File?> getImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return null;
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _image = imageSaved;
       });
-      await predictImage(imageSaved);
+      //await predictImage(imageSaved);
       return _image;
     } on PlatformException catch (e) {
       debugPrint('Failed to display image: $e');
@@ -100,33 +100,46 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Future<File?> imageFile(Function getImage, BuildContext context) async{
-  final File? image = await getImage(ImageSource.gallery, context);
-  return image;
-}
+// Future<File?> imageFile(Function getImage, BuildContext context) async{
+//   final File? image = await getImage(ImageSource.gallery, context);
+//   return image;
+// }
 
 CupertinoAlertDialog imageSourceAlertDialog(
     Function getImage, BuildContext context) {
-  File? image;
+  //File? image;
   var cam = CupertinoDialogAction(
       child: const Text('Camera'),
-      onPressed: () {
+      onPressed: () async {
         // print("Camera");
-        final File? image = getImage(ImageSource.camera, context);
-        //image = imageFile(getImage, context);
-        Navigator.of(context, rootNavigator: true).pop();
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Prediction(image: image)));
+        final navigator = Navigator.of(context);
+        final File? image = await getImage(ImageSource.camera);
+        navigator.pop();
+        //navigatorPop.pop();
+        
+        if (image != null){
+          await navigator.push(
+            MaterialPageRoute(builder: (context) => Prediction(image: image,)));
+        }
       });
-
   var gal = CupertinoDialogAction(
       child: const Text('Gallery'),
       onPressed: () async {
         // print("Gallery");
-        final File? image = await getImage(ImageSource.gallery, context);
-        Navigator.of(context, rootNavigator: true).pop();
-        Navigator.push(context,
+        //final navigatorPop = Navigator.of(context, rootNavigator: true);
+        //final navigatorRoute = Navigator.push(context, MaterialPageRoute(builder: ));
+        final navigator = Navigator.of(context);
+        final File? image = await getImage(ImageSource.gallery);
+        navigator.pop();
+        //navigatorPop.pop();
+        
+        if (image != null){
+          await navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
+        }
+        
+        //navigator.pop();
+        
       });
 
   return CupertinoAlertDialog(
@@ -135,6 +148,7 @@ CupertinoAlertDialog imageSourceAlertDialog(
     actions: [gal, cam],
   );
 }
+
 
 class Prediction extends StatelessWidget {
   //Prediction({Key? key}) : super(key: key);
