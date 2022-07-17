@@ -67,20 +67,6 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 40,
-            ),
-            _image != null
-                ? Image.file(
-                    _image!,
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  )
-                : Image.network('https://picsum.photos/250?imaghe=9'),
-            const SizedBox(
-              height: 40,
-            ),
             FloatingActionButton(
               onPressed: () {
                 showCupertinoDialog(
