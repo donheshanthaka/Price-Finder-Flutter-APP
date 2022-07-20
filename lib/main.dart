@@ -140,26 +140,26 @@ class SearchButton extends StatefulWidget {
 class _SearchButtonState extends State<SearchButton> {
 
 
-  Future<File?> _getImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return null;
-      final savedImage = await _saveImage(image.path);
+  // Future<File?> _getImage(ImageSource source) async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: source);
+  //     if (image == null) return null;
+  //     final savedImage = await _saveImage(image.path);
 
-      //await predictImage(imageSaved);
-      return savedImage;
-    } on PlatformException catch (e) {
-      debugPrint('Failed to display image: $e');
-    }
-    return null;
-  }
+  //     //await predictImage(imageSaved);
+  //     return savedImage;
+  //   } on PlatformException catch (e) {
+  //     debugPrint('Failed to display image: $e');
+  //   }
+  //   return null;
+  // }
 
-  Future<File> _saveImage(String imagePath) async {
-    final direcotry = await getApplicationDocumentsDirectory();
-    final name = basename(imagePath);
-    final image = File('${direcotry.path}/$name');
-    return File(imagePath).copy(image.path);
-  }
+  // Future<File> _saveImage(String imagePath) async {
+  //   final direcotry = await getApplicationDocumentsDirectory();
+  //   final name = basename(imagePath);
+  //   final image = File('${direcotry.path}/$name');
+  //   return File(imagePath).copy(image.path);
+  // }
 
   CupertinoAlertDialog _imageSourceAlertDialog(
     BuildContext context) {
@@ -168,8 +168,9 @@ class _SearchButtonState extends State<SearchButton> {
       child: const Text('Camera'),
       onPressed: () async {
         final navigator = Navigator.of(context);
-        navigator.pop(); // in case of error, put this beflow the _getImage call
-        final File? image = await _getImage(ImageSource.camera);
+        navigator.pop(); // in case of error, put this beflow the getImage call
+        // final File? image = await _getImage(ImageSource.camera);
+        final File? image = await Image.getImage(ImageSource.gallery);
         if (image != null){
           await navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
@@ -180,8 +181,9 @@ class _SearchButtonState extends State<SearchButton> {
       child: const Text('Gallery'),
       onPressed: () async {
         final navigator = Navigator.of(context);
-        navigator.pop(); // in case of error, put this beflow the _getImage call
-        final File? image = await _getImage(ImageSource.gallery);
+        navigator.pop(); // in case of error, put this beflow the getImage call
+        // final File? image = await _getImage(ImageSource.gallery);
+        final File? image = await Image.getImage(ImageSource.gallery);
         if (image != null){
           navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
@@ -202,3 +204,29 @@ class _SearchButtonState extends State<SearchButton> {
 }
 
 
+class Image{
+
+  static Future<File?> getImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return null;
+      //final savedImage = await _saveImage(image.path);
+
+      //await predictImage(imageSaved);
+      //return savedImage;
+      return File(image.path);
+    } on PlatformException catch (e) {
+      debugPrint('Failed to display image: $e');
+    }
+    return null;
+  }
+
+  // Future<File> _saveImage(String imagePath) async {
+  //   final direcotry = await getApplicationDocumentsDirectory();
+  //   final name = basename(imagePath);
+  //   final image = File('${direcotry.path}/$name');
+  //   return File(imagePath).copy(image.path);
+  // }
+}
+
+ 
