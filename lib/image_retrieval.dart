@@ -1,9 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImageRetrieval{
-
+class ImageRetrieval {
   static Future<File?> getImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
