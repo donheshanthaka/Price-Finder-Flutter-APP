@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
+//import 'package:path_provider/path_provider.dart';
+//import 'package:path/path.dart';
 import 'package:price_finder/predict_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:price_finder/prediction.dart';
+import 'package:price_finder/image_retrieval.dart';
 
 void main() {
   runApp(const MyApp());
@@ -170,7 +171,7 @@ class _SearchButtonState extends State<SearchButton> {
         final navigator = Navigator.of(context);
         navigator.pop(); // in case of error, put this beflow the getImage call
         // final File? image = await _getImage(ImageSource.camera);
-        final File? image = await Image.getImage(ImageSource.gallery);
+        final File? image = await ImageRetrieval.getImage(ImageSource.camera);
         if (image != null){
           await navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
@@ -183,7 +184,7 @@ class _SearchButtonState extends State<SearchButton> {
         final navigator = Navigator.of(context);
         navigator.pop(); // in case of error, put this beflow the getImage call
         // final File? image = await _getImage(ImageSource.gallery);
-        final File? image = await Image.getImage(ImageSource.gallery);
+        final File? image = await ImageRetrieval.getImage(ImageSource.gallery);
         if (image != null){
           navigator.push(
             MaterialPageRoute(builder: (context) => Prediction(image: image,)));
@@ -202,31 +203,3 @@ class _SearchButtonState extends State<SearchButton> {
     return _imageSourceAlertDialog(context);
   }
 }
-
-
-class Image{
-
-  static Future<File?> getImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return null;
-      //final savedImage = await _saveImage(image.path);
-
-      //await predictImage(imageSaved);
-      //return savedImage;
-      return File(image.path);
-    } on PlatformException catch (e) {
-      debugPrint('Failed to display image: $e');
-    }
-    return null;
-  }
-
-  // Future<File> _saveImage(String imagePath) async {
-  //   final direcotry = await getApplicationDocumentsDirectory();
-  //   final name = basename(imagePath);
-  //   final image = File('${direcotry.path}/$name');
-  //   return File(imagePath).copy(image.path);
-  // }
-}
-
- 
