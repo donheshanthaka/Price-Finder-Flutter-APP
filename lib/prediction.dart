@@ -29,6 +29,16 @@ class Prediction extends StatelessWidget {
                     fit: BoxFit.cover,
                   )
                 : Image.network('https://picsum.photos/250?imaghe=9'),
+            const Text(
+              "Hellow",
+              style: TextStyle(
+                fontSize: 25,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(2.0),
+              child: Text('data'),
+            )
           ],
         ),
       ),
