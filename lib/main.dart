@@ -97,6 +97,8 @@ class _SearchButtonState extends State<SearchButton> {
           final File? image =
               await ImageRetrieval.getImage(ImageSource.gallery);
           if (image != null) {
+            String vehicleName = await predictImage(image);
+            String price = await getPrice(vehicleName);
             navigator.push(MaterialPageRoute(
               builder: (context) => Prediction(
                 image: image,

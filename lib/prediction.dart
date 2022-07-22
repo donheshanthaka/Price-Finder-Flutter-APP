@@ -29,15 +29,27 @@ class Prediction extends StatelessWidget {
                     fit: BoxFit.cover,
                   )
                 : Image.network('https://picsum.photos/250?imaghe=9'),
-            const Text(
-              "Hellow",
-              style: TextStyle(
-                fontSize: 25,
+            const Padding(
+              padding: EdgeInsets.all(45.0),
+              child: Text(
+                "Wagon R Stingray 2018",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 59, 77, 85),
+                ),
               ),
             ),
             const Padding(
-              padding: EdgeInsets.all(2.0),
-              child: Text('data'),
+              padding: EdgeInsets.all(1.0),
+              child: Text(
+                "Rs. 6,000,000",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 59, 77, 85),
+                ),
+              ),
             )
           ],
         ),
