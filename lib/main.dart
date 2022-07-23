@@ -80,9 +80,13 @@ class _SearchButtonState extends State<SearchButton> {
               .pop(); // in case of error, put this beflow the getImage call
           final File? image = await ImageRetrieval.getImage(ImageSource.camera);
           if (image != null) {
+            String vehicleName = await predictImage(image);
+            String price = await getPrice(vehicleName);
             await navigator.push(MaterialPageRoute(
               builder: (context) => Prediction(
                 image: image,
+                vehicleName: vehicleName,
+                price: price,
               ),
             ));
           }
@@ -97,11 +101,13 @@ class _SearchButtonState extends State<SearchButton> {
           final File? image =
               await ImageRetrieval.getImage(ImageSource.gallery);
           if (image != null) {
-            String vehicleName = await predictImage(image);
-            String price = await getPrice(vehicleName);
+            final String vehicleName = await predictImage(image);
+            final String price = await getPrice(vehicleName);
             navigator.push(MaterialPageRoute(
               builder: (context) => Prediction(
                 image: image,
+                vehicleName: vehicleName,
+                price: price,
               ),
             ));
           }

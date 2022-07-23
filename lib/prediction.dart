@@ -6,8 +6,10 @@ class Prediction extends StatelessWidget {
   //Prediction({Key? key}) : super(key: key);
 
   File? image;
+  String vehicleName;
+  String price;
 
-  Prediction({Key? key, required this.image}) : super(key: key);
+  Prediction({Key? key, required this.image, required this.vehicleName, required this.price}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +31,24 @@ class Prediction extends StatelessWidget {
                     fit: BoxFit.cover,
                   )
                 : Image.network('https://picsum.photos/250?imaghe=9'),
-            const Padding(
-              padding: EdgeInsets.all(45.0),
+            Padding(
+              padding: const EdgeInsets.all(45.0),
               child: Text(
-                "Wagon R Stingray 2018",
-                style: TextStyle(
+                vehicleName,
+                //"Wagon R Stingray 2018",
+                style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 59, 77, 85),
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(1.0),
+            Padding(
+              padding: const EdgeInsets.all(1.0),
               child: Text(
-                "Rs. 6,000,000",
-                style: TextStyle(
+                price,
+                //"Rs. 6,000,000",
+                style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 59, 77, 85),
