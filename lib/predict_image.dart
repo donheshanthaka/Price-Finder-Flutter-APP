@@ -30,5 +30,10 @@ Future<String> getPrice(String vehicleName) async{
   Uri url = Uri.parse(localPriceUrl);
   url = url.replace(queryParameters: params);
   final response = await http.get(url);
-  return response.body;
+  if (response.statusCode == 200){
+    return response.body;
+  } else {
+    throw Exception("Failed to get price");
+  }
+  
 }
