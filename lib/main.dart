@@ -128,11 +128,13 @@ class _SearchButtonState extends State<SearchButton> {
   }
 }
 
-Future<String> getVehcileName() async {
+Future<List<String>> getVehcileDetails() async {
   await Future.delayed(const Duration(seconds: 5));
   print('getVehcileName called');
-  String price = await getVehcilePrice("Wagon R");
-  return "Wagon R$price";
+  List<String> details = [];
+  details.add("Wagon R");
+  details.add(await getVehcilePrice("Wagon R"));
+  return details;
 }
 
 Future<String> getVehcilePrice(String vehicleName) async {
@@ -151,6 +153,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  final Future<List<String>> _vehicleDetails = getVehcileDetails();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,17 +161,26 @@ class _LoadingScreenState extends State<LoadingScreen> {
         title: const Text('Loading'),
       ),
       body: Center(
-        child: FutureBuilder(
-          future: getVehcileName(),
+        child: FutureBuilder<List<String>>(
+          future: _vehicleDetails,
           builder: (context, snapshot) {
-            if (snapshot.hasData){
-              print(snapshot.data);
-              return const Text("Data Recieved");
-              
-            } else {
-              return const CircularProgressIndicator();
+            switch (snapshot.connectionState){
+              case ConnectionState.active:
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return const CircularProgressIndicator();
+              case ConnectionState.done:
+              default:
+                if (snapshot.hasData){
+                  print(snapshot.data![0]);
+                  print(snapshot.data![1]);
+                  return Text("${snapshot.data![0]} ${snapshot.data![1]}");
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                } else {
+                  return const Text("No Data");
+                }
             }
-            
           },
         ),
       ),
