@@ -96,20 +96,22 @@ class _SearchButtonState extends State<SearchButton> {
         child: const Text('Gallery'),
         onPressed: () async {
           final navigator = Navigator.of(context);
-          navigator
-              .pop(); // in case of error, put this beflow the getImage call
+          navigator.pop(); // in case of error, put this beflow the getImage call
           final File? image =
               await ImageRetrieval.getImage(ImageSource.gallery);
-          if (image != null) {
-            final String vehicleName = await predictImage(image);
-            final String price = await getPrice(vehicleName);
-            navigator.push(MaterialPageRoute(
-              builder: (context) => Prediction(
-                image: image,
-                vehicleName: vehicleName,
-                price: price,
-              ),
-            ));
+          // if (image != null) {
+          //   final String vehicleName = await predictImage(image);
+          //   final String price = await getPrice(vehicleName);
+          //   navigator.push(MaterialPageRoute(
+          //     builder: (context) => Prediction(
+          //       image: image,
+          //       vehicleName: vehicleName,
+          //       price: price,
+          //     ),
+          //   ));
+          // }
+          if (image != null){
+            navigator.push(MaterialPageRoute(builder: (context) => LoadingScreen()));
           }
         });
 
@@ -126,14 +128,50 @@ class _SearchButtonState extends State<SearchButton> {
   }
 }
 
-
-
 Future<String> getVehcileName() async {
   await Future.delayed(const Duration(seconds: 5));
-  return "Wagon R"; 
+  print('getVehcileName called');
+  String price = await getVehcilePrice("Wagon R");
+  return "Wagon R$price";
 }
 
 Future<String> getVehcilePrice(String vehicleName) async {
   await Future.delayed(const Duration(seconds: 5));
-  return "Rs. 6,500,000"; 
+  print('getVehcilePrice called');
+  print(vehicleName);
+  return "Rs. 6,500,000";
+}
+
+
+class LoadingScreen extends StatefulWidget {
+  LoadingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoadingScreen> createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Loading'),
+      ),
+      body: Center(
+        child: FutureBuilder(
+          future: getVehcileName(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData){
+              print(snapshot.data);
+              return const Text("Data Recieved");
+              
+            } else {
+              return const CircularProgressIndicator();
+            }
+            
+          },
+        ),
+      ),
+    );
+  }
 }
