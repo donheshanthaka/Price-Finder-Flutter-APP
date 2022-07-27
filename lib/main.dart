@@ -111,7 +111,7 @@ class _SearchButtonState extends State<SearchButton> {
           //   ));
           // }
           if (image != null){
-            navigator.push(MaterialPageRoute(builder: (context) => LoadingScreen()));
+            navigator.push(MaterialPageRoute(builder: (context) => LoadingScreen(image: image,)));
           }
         });
 
@@ -135,18 +135,21 @@ Future<List<String>> getVehcileDetails() async {
   details.add("Wagon R");
   details.add(await getVehcilePrice("Wagon R"));
   return details;
+  //throw const SocketException("No Internet");
 }
 
 Future<String> getVehcilePrice(String vehicleName) async {
   await Future.delayed(const Duration(seconds: 5));
-  print('getVehcilePrice called');
-  print(vehicleName);
+  //print('getVehcilePrice called');
+  //print(vehicleName);
   return "Rs. 6,500,000";
+  //throw const SocketException("No Internet");
 }
 
 
 class LoadingScreen extends StatefulWidget {
-  LoadingScreen({Key? key}) : super(key: key);
+  final File image;
+  const LoadingScreen({Key? key, required this.image}) : super(key: key);
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -164,17 +167,56 @@ class _LoadingScreenState extends State<LoadingScreen> {
         child: FutureBuilder<List<String>>(
           future: _vehicleDetails,
           builder: (context, snapshot) {
-            switch (snapshot.connectionState){
-              case ConnectionState.active:
-              case ConnectionState.none:
+            switch (snapshot.connectionState) {
+              // case ConnectionState.active:
+              // case ConnectionState.none:
               case ConnectionState.waiting:
                 return const CircularProgressIndicator();
               case ConnectionState.done:
               default:
-                if (snapshot.hasData){
+                if (snapshot.hasData) {
                   print(snapshot.data![0]);
                   print(snapshot.data![1]);
-                  return Text("${snapshot.data![0]} ${snapshot.data![1]}");
+                  //return Text("${snapshot.data![0]} ${snapshot.data![1]}");
+                  return Center(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Image.file(
+                          widget.image,
+                          width: 250,
+                          height: 250,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(45.0),
+                          child: Text(
+                            snapshot.data![0],
+                            //"Wagon R Stingray 2018",
+                            style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 59, 77, 85),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: Text(
+                            snapshot.data![1],
+                            //"Rs. 6,000,000",
+                            style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 59, 77, 85),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 } else {
