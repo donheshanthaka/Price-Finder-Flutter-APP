@@ -171,13 +171,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
   //   _vehicleDetails = predictImage();
   // }
 
-  // late Future<Vehicle> vehicle;
+  late Future<Vehicle> vehicle;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   vehicle = getVehicleInfo();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    vehicle = getVehicleInfo(widget.image);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +187,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       ),
       body: Center(
         child: FutureBuilder<Vehicle>(
-          future: getVehicleInfo(widget.image),
+          future: vehicle,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
