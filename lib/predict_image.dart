@@ -57,7 +57,7 @@ Future<String> getPrice(String vehicleName) async{
 
 Future<Vehicle> getVehicleInfo(File image) async {
   String localUrl =
-      "http://192.168.1.101:8000/"; // // use the current ip address by running ipconfig at the time of debugging using emulator
+      "http://192.168.1.103:8000/test"; // // use the current ip address by running ipconfig at the time of debugging using emulator
   var request = http.MultipartRequest("POST", Uri.parse(localUrl));
   var multipartFile =
       await http.MultipartFile.fromPath('imageFile', image.path);
@@ -68,7 +68,7 @@ Future<Vehicle> getVehicleInfo(File image) async {
         await request.send().timeout(const Duration(seconds: 10));
     if (streamedResponse.statusCode == 200) {
       var response = await http.Response.fromStream(streamedResponse);
-      final result = jsonDecode(response.body);
+      final result = jsonDecode(response.body) as Map<String, dynamic>;
       return Vehicle.fromJson(result);
     } else {
       throw Exception("Error: Falied to indentify image");

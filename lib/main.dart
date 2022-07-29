@@ -7,8 +7,10 @@ import 'package:image_picker/image_picker.dart';
 //import 'package:path/path.dart';
 import 'package:price_finder/predict_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:price_finder/prediction.dart';
+//import 'package:price_finder/prediction.dart';
 import 'package:price_finder/image_retrieval.dart';
+import 'package:price_finder/failure.dart';
+import 'package:price_finder/models/vehicle.dart';
 
 void main() {
   runApp(const MyApp());
@@ -80,15 +82,15 @@ class _SearchButtonState extends State<SearchButton> {
               .pop(); // in case of error, put this beflow the getImage call
           final File? image = await ImageRetrieval.getImage(ImageSource.camera);
           if (image != null) {
-            final String vehicleName = await predictImage(image);
-            final String price = await getPrice(vehicleName);
-            await navigator.push(MaterialPageRoute(
-              builder: (context) => Prediction(
-                image: image,
-                vehicleName: vehicleName,
-                price: price,
-              ),
-            ));
+            // final String vehicleName = await predictImage(image);
+            // final String price = await getPrice(vehicleName);
+            // await navigator.push(MaterialPageRoute(
+            //   builder: (context) => Prediction(
+            //     image: image,
+            //     vehicleName: vehicleName,
+            //     price: price,
+            //   ),
+            // ));
           }
         });
 
@@ -136,6 +138,7 @@ Future<List<String>> getVehcileDetails() async {
   details.add(await getVehcilePrice("Wagon R"));
   return details;
   //throw const SocketException("No Internet");
+  //throw Error("444");
 }
 
 Future<String> getVehcilePrice(String vehicleName) async {
@@ -156,7 +159,25 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  final Future<List<String>> _vehicleDetails = getVehcileDetails();
+  // final Future<List<String>> _vehicleDetails = getVehcileDetails();
+  //late LoadingScreen image;
+  //final Future<List<String>> _vehicleDetails = predictImage(image.getImage());
+  // late Future<List<String>> _vehicleDetails;
+
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   _vehicleDetails = predictImage();
+  // }
+
+  // late Future<Vehicle> vehicle;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   vehicle = getVehicleInfo();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,20 +185,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
         title: const Text('Loading'),
       ),
       body: Center(
-        child: FutureBuilder<List<String>>(
-          future: _vehicleDetails,
+        child: FutureBuilder<Vehicle>(
+          future: getVehicleInfo(widget.image),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
-              // case ConnectionState.active:
-              // case ConnectionState.none:
               case ConnectionState.waiting:
                 return const CircularProgressIndicator();
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
-                  print(snapshot.data![0]);
-                  print(snapshot.data![1]);
-                  //return Text("${snapshot.data![0]} ${snapshot.data![1]}");
+                  print(snapshot.data!.model);
+                  print(snapshot.data!.price);
                   return Center(
                     child: Column(
                       children: [
@@ -193,7 +211,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         Padding(
                           padding: const EdgeInsets.all(45.0),
                           child: Text(
-                            snapshot.data![0],
+                            snapshot.data!.model,
                             //"Wagon R Stingray 2018",
                             style: const TextStyle(
                               fontSize: 25,
@@ -205,7 +223,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         Padding(
                           padding: const EdgeInsets.all(1.0),
                           child: Text(
-                            snapshot.data![1],
+                            snapshot.data!.price,
                             //"Rs. 6,000,000",
                             style: const TextStyle(
                               fontSize: 25,
@@ -229,3 +247,5 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 }
+
+
