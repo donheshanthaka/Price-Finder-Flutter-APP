@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 //import 'package:path_provider/path_provider.dart';
 //import 'package:path/path.dart';
-import 'package:price_finder/predict_image.dart';
+import 'package:price_finder/get_vehicle_info.dart';
 import 'package:flutter/cupertino.dart';
 //import 'package:price_finder/prediction.dart';
 import 'package:price_finder/image_retrieval.dart';
