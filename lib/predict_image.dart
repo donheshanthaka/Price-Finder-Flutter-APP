@@ -1,7 +1,10 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:price_finder/failure.dart';
+import 'package:price_finder/models/vehicle.dart';
 
 Future<List<String>> predictImage(File file) async {
   //String url = "https://get-prediction-hezxtblxwq-el.a.run.app";
@@ -19,7 +22,7 @@ Future<List<String>> predictImage(File file) async {
   request.files.add(multipartFile);
 
   try{
-    var response = await request.send();
+    var response = await request.send().timeout(const Duration(seconds: 10));
     if (response.statusCode == 200) {
       var responseData = await response.stream.toBytes();
       var vehicleName = String.fromCharCodes(responseData);
@@ -27,10 +30,12 @@ Future<List<String>> predictImage(File file) async {
       info.add(await getPrice(vehicleName));
       return info;
     } else {
-      throw Exception("Falied to indentify image");
+      throw Exception("Error: Falied to indentify image");
     }
   } on SocketException {
     throw Failure("Error: Cannot connect to server!");
+  } on TimeoutException {
+    throw Failure("Error: Server timeout!");
   }
   
 }
@@ -47,4 +52,30 @@ Future<String> getPrice(String vehicleName) async{
     throw Exception("Failed to get price");
   }
   
+}
+
+
+Future<Vehicle> getVehicleInfo(File image) async {
+  String localUrl =
+      "http://192.168.1.101:8000/"; // // use the current ip address by running ipconfig at the time of debugging using emulator
+  var request = http.MultipartRequest("POST", Uri.parse(localUrl));
+  var multipartFile =
+      await http.MultipartFile.fromPath('imageFile', image.path);
+  request.files.add(multipartFile);
+
+  try {
+    var streamedResponse =
+        await request.send().timeout(const Duration(seconds: 10));
+    if (streamedResponse.statusCode == 200) {
+      var response = await http.Response.fromStream(streamedResponse);
+      final result = jsonDecode(response.body);
+      return Vehicle.fromJson(result);
+    } else {
+      throw Exception("Error: Falied to indentify image");
+    }
+  } on SocketException {
+    throw Failure("Error: Cannot connect to server!");
+  } on TimeoutException {
+    throw Failure("Error: Server timeout!");
+  }
 }
