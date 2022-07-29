@@ -91,6 +91,7 @@ class _SearchButtonState extends State<SearchButton> {
             //     price: price,
             //   ),
             // ));
+            navigator.push(MaterialPageRoute(builder: (context) => LoadingScreen(image: image,)));
           }
         });
 
