@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "price_finder_dev",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart"
+        },
+        {
+            "name": "price_finder_prod",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart"
+        },
+        {
+            "name": "price_finder (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "price_finder (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
