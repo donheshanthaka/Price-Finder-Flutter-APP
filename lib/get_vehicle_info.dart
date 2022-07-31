@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:price_finder/failure.dart';
 import 'package:price_finder/models/vehicle.dart';
+import 'package:price_finder/config_reader.dart';
 
 Future<List<String>> predictImage(File file) async {
   //String url = "https://get-prediction-hezxtblxwq-el.a.run.app";
@@ -57,8 +58,9 @@ Future<String> getPrice(String vehicleName) async{
 
 Future<Vehicle> getVehicleInfo(File image) async {
   String localUrl =
-      "http://192.168.1.102:8000/test"; // // use the current ip address by running ipconfig at the time of debugging using emulator
-  var request = http.MultipartRequest("POST", Uri.parse(localUrl));
+      "http://192.168.1.100:8000/test"; // // use the current ip address by running ipconfig at the time of debugging using emulator
+  String url = '${ConfigReader.getApiUrl()}/test';
+  var request = http.MultipartRequest("POST", Uri.parse(url));
   var multipartFile =
       await http.MultipartFile.fromPath('imageFile', image.path);
   request.files.add(multipartFile);
