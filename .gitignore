@@ -10,6 +10,10 @@
 .svn/
 migrate_working_dir/
 
+# Config files
+/config/app_config_dev.json
+/config/app_config_prod.json
+
 # IntelliJ related
 *.iml
 *.ipr
