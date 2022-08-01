@@ -10,10 +10,10 @@ abstract class ConfigReader {
     late String path;
     switch (env){
       case Environment.dev:
-        path = 'config/app_config_dev.json';
+        path = 'assets/config/app_config_dev.json';
         break;
       case Environment.prod:
-        path = 'config/app_config_prod.json';
+        path = 'assets/config/app_config_prod.json';
         break;
     }
     final configString = await rootBundle.loadString(path);
