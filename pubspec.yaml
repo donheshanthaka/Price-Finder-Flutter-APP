@@ -63,8 +63,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - config/app_config_dev.json
-    - config/app_config_prod.json
+    - assets/config/app_config_dev.json
+    - assets/config/app_config_prod.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
