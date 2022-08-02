@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:price_finder/failure.dart';
-import 'package:price_finder/models/vehicle.dart';
+import 'package:price_finder/features/search_image/models/vehicle_model.dart';
 import 'package:price_finder/config_reader.dart';
 
 Future<List<String>> predictImage(File file) async {

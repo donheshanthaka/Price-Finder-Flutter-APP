@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 //import 'package:price_finder/prediction.dart';
 import 'package:price_finder/image_retrieval.dart';
 import 'package:price_finder/failure.dart';
-import 'package:price_finder/models/vehicle.dart';
+import 'package:price_finder/features/search_image/models/vehicle_model.dart';
 
 import 'features/select_image/view/get_image.dart';
 

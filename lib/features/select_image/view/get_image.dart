@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:price_finder/features/select_image/controller/image_controller.dart';
 
 import '../../../get_vehicle_info.dart';
-import '../../../models/vehicle.dart';
+import '../../search_image/models/vehicle_model.dart';
 
 class GetImage extends StatefulWidget {
   GetImage({Key? key}) : super(key: key);
