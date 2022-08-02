@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return SearchButton();
+                    return GetImage();
                   },
                   barrierDismissible: true,
                 );
@@ -65,14 +65,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class SearchButton extends StatefulWidget {
-  SearchButton({Key? key}) : super(key: key);
+class GetImage extends StatefulWidget {
+  GetImage({Key? key}) : super(key: key);
 
   @override
-  State<SearchButton> createState() => _SearchButtonState();
+  State<GetImage> createState() => _GetImageState();
 }
 
-class _SearchButtonState extends State<SearchButton> {
+class _GetImageState extends State<GetImage> {
   CupertinoAlertDialog _imageSourceAlertDialog(BuildContext context) {
     CupertinoDialogAction camera = CupertinoDialogAction(
         child: const Text('Camera'),
