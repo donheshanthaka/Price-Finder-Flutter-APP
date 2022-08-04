@@ -6,14 +6,14 @@ import 'package:price_finder/features/select_image/controller/image_controller.d
 
 import '../../search_image/view/vehicle_page_view.dart';
 
-class GetImageDialog extends StatefulWidget {
-  GetImageDialog({Key? key}) : super(key: key);
+class SelectImageDialog extends StatefulWidget {
+  SelectImageDialog({Key? key}) : super(key: key);
 
   @override
-  State<GetImageDialog> createState() => _GetImageDialogState();
+  State<SelectImageDialog> createState() => _SelectImageDialogState();
 }
 
-class _GetImageDialogState extends State<GetImageDialog> {
+class _SelectImageDialogState extends State<SelectImageDialog> {
   final ImageController imageController = ImageController();
   CupertinoAlertDialog _imageSourceAlertDialog(BuildContext context) {
     CupertinoDialogAction camera = CupertinoDialogAction(
