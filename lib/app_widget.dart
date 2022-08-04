@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'features/select_image/view/get_image.dart';
+import 'features/select_image/view/get_image_view.dart';
 
 
 class MyApp extends StatelessWidget {
