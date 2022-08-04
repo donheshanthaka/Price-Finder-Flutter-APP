@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:price_finder/environment.dart';
+import 'package:price_finder/constants/environment.dart';
 
 abstract class ConfigReader {
   static late Map<String, dynamic> _config;
