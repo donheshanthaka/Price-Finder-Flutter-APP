@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Image {
+class ImageModel {
   static Future<File?> getImage(String imageSource) async {
     late ImageSource source;
     if (imageSource == 'camera'){
