@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:price_finder/failure.dart';
+import 'package:price_finder/utils/failure.dart';
 import 'package:price_finder/features/search_image/models/vehicle_model.dart';
-import 'package:price_finder/config_reader.dart';
+import 'package:price_finder/utils/config_reader.dart';
 
 Future<List<String>> predictImage(File file) async {
   //String url = "https://get-prediction-hezxtblxwq-el.a.run.app";
-  String localPredUrl = "http://192.168.1.101:8000/"; // // use the current ip address by running ipconfig at the time of debugging using emulator
+  String localPredUrl = "http://192.168.1.101:8000/test"; // // use the current ip address by running ipconfig at the time of debugging using emulator
   
   //print('Image path >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
   //print(file.path);
@@ -28,7 +28,8 @@ Future<List<String>> predictImage(File file) async {
       var responseData = await response.stream.toBytes();
       var vehicleName = String.fromCharCodes(responseData);
       info.add(vehicleName);
-      info.add(await getPrice(vehicleName));
+      // info.add(await getPrice(vehicleName)); // Un comment this line
+      info.add('650000');
       return info;
     } else {
       throw Exception("Error: Falied to indentify image");
@@ -57,8 +58,7 @@ Future<String> getPrice(String vehicleName) async{
 
 
 Future<Vehicle> getVehicleInfo(File image) async {
-  String localUrl =
-      "http://192.168.1.100:8000/test"; // // use the current ip address by running ipconfig at the time of debugging using emulator
+  // String localUrl = "http://192.168.1.100:8000/test"; // // use the current ip address by running ipconfig at the time of debugging using emulator
   String url = '${ConfigReader.getApiUrl()}/test';
   var request = http.MultipartRequest("POST", Uri.parse(url));
   var multipartFile =
