@@ -1,22 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-//import 'package:path_provider/path_provider.dart';
-//import 'package:path/path.dart';
-import 'package:price_finder/get_vehicle_info.dart';
 import 'package:flutter/cupertino.dart';
-//import 'package:price_finder/prediction.dart';
-import 'package:price_finder/image_retrieval.dart';
-import 'package:price_finder/failure.dart';
-import 'package:price_finder/features/search_image/models/vehicle_model.dart';
 
 import 'features/select_image/view/get_image.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
