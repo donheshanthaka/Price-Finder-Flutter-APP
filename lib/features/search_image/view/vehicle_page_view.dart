@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../../../get_vehicle_info.dart';
-import '../../search_image/models/vehicle_model.dart';
+import 'package:price_finder/features/search_image/controller/search_image_controller.dart';
+// import '../../search_image/models/vehicle_model.dart';
 
 
 
@@ -17,12 +17,20 @@ class VehiclePage extends StatefulWidget {
 
 class _VehiclePageState extends State<VehiclePage> {
   
-  late Future<Vehicle> vehicle;
+  final SearchImageController searchImageController = SearchImageController();
+
+  // late Future<Vehicle> vehicle;
+
+  late Future<bool> success;
+
+  // late Future<List> dum;
 
   @override
   void initState() {
     super.initState();
-    vehicle = getVehicleInfo(widget.image);
+    // vehicle = getVehicleInfo(widget.image);
+    success = searchImageController.getVehicleInfo(widget.image);
+    // dum = predictImage(widget.image);
   }
 
   @override
@@ -32,8 +40,8 @@ class _VehiclePageState extends State<VehiclePage> {
         title: const Text('Loading'),
       ),
       body: Center(
-        child: FutureBuilder<Vehicle>(
-          future: vehicle,
+        child: FutureBuilder<bool>(
+          future: success,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -41,8 +49,8 @@ class _VehiclePageState extends State<VehiclePage> {
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
-                  print(snapshot.data!.model);
-                  print(snapshot.data!.price);
+                  // print(snapshot.data!.model);
+                  // print(snapshot.data!.price);
                   return Center(
                     child: Column(
                       children: [
@@ -58,7 +66,8 @@ class _VehiclePageState extends State<VehiclePage> {
                         Padding(
                           padding: const EdgeInsets.all(45.0),
                           child: Text(
-                            snapshot.data!.model,
+                            searchImageController.getModel(),
+                            // snapshot.data!.model,
                             //"Wagon R Stingray 2018",
                             style: const TextStyle(
                               fontSize: 25,
@@ -70,7 +79,8 @@ class _VehiclePageState extends State<VehiclePage> {
                         Padding(
                           padding: const EdgeInsets.all(1.0),
                           child: Text(
-                            snapshot.data!.price,
+                            searchImageController.getPriceFromModel(),
+                            // snapshot.data!.price,
                             //"Rs. 6,000,000",
                             style: const TextStyle(
                               fontSize: 25,
