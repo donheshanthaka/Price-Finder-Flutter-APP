@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:price_finder/features/select_image/models/image_model.dart';
-import 'package:price_finder/features/select_image/view/get_image_view.dart';
+import 'package:price_finder/features/select_image/view/select_image_view.dart';
 
 class ImageController extends ControllerMVC {
   factory ImageController([StateMVC? state]) => _this ??= ImageController._(state);
