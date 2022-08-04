@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return imageController.getImageDialog();
+                    return imageController.selectImageDialog();
                   },
                   barrierDismissible: true,
                 );

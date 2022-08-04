@@ -14,7 +14,7 @@ class ImageController extends ControllerMVC {
     return ImageModel.getImage(imageSource);
    }
 
-   SelectImageDialog getImageDialog(){
+   SelectImageDialog selectImageDialog(){
     return SelectImageDialog();
    }
 }
