@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:price_finder/features/select_image/controller/image_controller.dart';
 
-import 'features/select_image/view/get_image_view.dart';
+// import 'features/select_image/view/get_image_view.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -25,6 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ImageController imageController = ImageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return GetImage();
+                    return imageController.getImageDialog();
                   },
                   barrierDismissible: true,
                 );
