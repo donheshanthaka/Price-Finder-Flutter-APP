@@ -67,7 +67,8 @@ class SearchImageController extends ControllerMVC {
   }
 
   Future<bool> getVehicleInfo(File image) async {
-    String url = '${ConfigReader.getApiUrl()}/test';
+    // String url = '${ConfigReader.getApiUrl()}/test';
+    String url = ConfigReader.getApiUrl();
     var request = http.MultipartRequest("POST", Uri.parse(url));
     var multipartFile =
         await http.MultipartFile.fromPath('imageFile', image.path);
@@ -75,14 +76,14 @@ class SearchImageController extends ControllerMVC {
 
     try {
       var streamedResponse =
-          await request.send().timeout(const Duration(seconds: 10));
+          await request.send().timeout(const Duration(seconds: 60));
+      var response = await http.Response.fromStream(streamedResponse);
+      final result = jsonDecode(response.body.toString()) as Map<String, dynamic>;
       if (streamedResponse.statusCode == 200) {
-        var response = await http.Response.fromStream(streamedResponse);
-        final result = jsonDecode(response.body) as Map<String, dynamic>;
         vehicle.updateInfo(result);
         return true;
-      } else if (streamedResponse.statusCode == 415) {
-        throw Failure("Error: Invalid image type");
+      } else if (streamedResponse.statusCode != 200) {
+        throw Failure('Error: ${result['message']}');
       } else {
         throw Failure(
             'Error: Unexpected error occured, please contact support!');
