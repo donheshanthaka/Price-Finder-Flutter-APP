@@ -4,6 +4,10 @@ import 'package:price_finder/features/select_image/controller/image_controller.d
 
 // import 'features/select_image/view/get_image_view.dart';
 
+class GlobalContextService { 
+  static GlobalKey<NavigatorState> navigatorKey = 
+  GlobalKey<NavigatorState>();
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -11,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: GlobalContextService.navigatorKey, // set property
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: HomePage(),

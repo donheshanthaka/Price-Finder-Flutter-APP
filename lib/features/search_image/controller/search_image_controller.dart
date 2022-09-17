@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:http/http.dart' as http;
+import 'package:price_finder/main/app.dart';
 import 'package:price_finder/utils/failure.dart';
 import 'package:price_finder/features/search_image/models/vehicle_model_update.dart';
 import 'package:price_finder/utils/config_reader.dart';
+import 'package:price_finder/features/search_image/view/vehicle_page_view.dart';
 
 
 class SearchImageController extends ControllerMVC {
@@ -102,5 +105,10 @@ class SearchImageController extends ControllerMVC {
   String getPriceFromModel(){
     return vehicle.getprice();
   }
+
+  loadVehiclePage(File image){
+    final context = GlobalContextService.navigatorKey.currentContext!;
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => VehiclePage(image: image)));
+   }
   
 }
