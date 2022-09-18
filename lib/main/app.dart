@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:price_finder/features/select_image/controller/image_controller.dart';
+import 'package:price_finder/utils/global_context_service.dart';
 
 // import 'features/select_image/view/get_image_view.dart';
 
-class GlobalContextService { 
-  static GlobalKey<NavigatorState> navigatorKey = 
-  GlobalKey<NavigatorState>();
-}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

@@ -5,12 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:http/http.dart' as http;
-import 'package:price_finder/main/app.dart';
 import 'package:price_finder/utils/failure.dart';
 import 'package:price_finder/features/search_image/models/vehicle_model_update.dart';
 import 'package:price_finder/utils/config_reader.dart';
 import 'package:price_finder/features/search_image/view/vehicle_page_view.dart';
-
+import 'package:price_finder/utils/global_context_service.dart';
 
 class SearchImageController extends ControllerMVC {
   factory SearchImageController([StateMVC? state]) =>
