@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:price_finder/features/select_image/controller/image_controller.dart';
 import 'package:price_finder/utils/global_context_service.dart';
+import 'package:rive/rive.dart';
 
+import 'package:flutter/src/painting/gradient.dart' as gd;
 // import 'features/select_image/view/get_image_view.dart';
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: GlobalContextService.navigatorKey, // set property
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
@@ -58,7 +58,52 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class SplashScreen extends StatefulWidget {
+  SplashScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      Duration(seconds: 3),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => HomePage(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // backgroundColor: Color.fromARGB(255, 26, 39, 56),
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: gd.RadialGradient(
+                center: Alignment(0, -0.1),
+                radius: 1,
+                colors: <Color>[
+              Color.fromARGB(223, 2, 22, 51),
+              Color.fromARGB(223, 1, 7, 26),
+            ])),
+        child: Center(
+          child: Container(
+            width: 400,
+            child: const RiveAnimation.asset(
+                'assets/splash_screen/price_finder.riv'),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 Future<List<String>> getVehcileDetails() async {
   await Future.delayed(const Duration(seconds: 5));
@@ -78,4 +123,3 @@ Future<String> getVehcilePrice(String vehicleName) async {
   return "Rs. 6,500,000";
   //throw const SocketException("No Internet");
 }
-
