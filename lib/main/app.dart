@@ -30,6 +30,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ImageController imageController = ImageController();
+  late RiveAnimationController _searchButtonController;
+
+  void _searchButtonFunction(RiveAnimationController controller){
+    if(controller.isActive == false) {
+      controller.isActive = true;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _searchButtonController = OneShotAnimation(
+      'Animation 1',
+      autoplay: false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +67,26 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               child: const Icon(Icons.search_rounded),
+            ),
+            const SizedBox(height: 120,
+            ),
+            GestureDetector(
+              onTapDown: (_) => _searchButtonFunction(
+                _searchButtonController,
+              ),
+              child: Container(
+                width: 200,
+                height: 200,
+                // margin: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: RiveAnimation.asset(
+                  'assets/buttons/search_button.riv',
+                  controllers: [_searchButtonController,
+                  ],
+                ),
+              ),
             )
           ],
         ),
