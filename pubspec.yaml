@@ -67,6 +67,7 @@ flutter:
     - assets/config/app_config_dev.json
     - assets/config/app_config_prod.json
     - assets/splash_screen/price_finder.riv
+    - assets/buttons/search_button.riv
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
