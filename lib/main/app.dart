@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: GlobalContextService.navigatorKey, // set property
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      theme: ThemeData(
+          primarySwatch: Colors.blueGrey,
+          appBarTheme: const AppBarTheme(
+            color:  Color.fromARGB(255, 26, 41, 65)
+          )
+          ),
       home: SplashScreen(),
     );
   }
@@ -70,7 +75,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Price Finder'),
+        title: const Text('PRICE - FINDER', style: TextStyle(fontFamily: 'Chandstate')),
+        centerTitle: true,
       ),
       body: Container(
         decoration: const BoxDecoration(
