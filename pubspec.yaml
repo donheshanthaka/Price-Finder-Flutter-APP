@@ -70,6 +70,7 @@ flutter:
     - assets/buttons/search_button.riv
     - assets/buttons/search_button_background.riv
     - assets/ui_elements/search_loader.riv
+    - assets/ui_elements/search_loader_breathing.riv
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

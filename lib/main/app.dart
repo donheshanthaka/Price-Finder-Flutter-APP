@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
       navigatorKey: GlobalContextService.navigatorKey, // set property
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          appBarTheme: const AppBarTheme(
-            color:  Color.fromARGB(255, 26, 41, 65)
-          )
-          ),
+        primarySwatch: Colors.blueGrey,
+        appBarTheme: const AppBarTheme(
+          color: Color.fromARGB(255, 26, 41, 65),
+        ),
+      ),
       home: SplashScreen(),
     );
   }
