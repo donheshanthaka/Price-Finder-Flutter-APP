@@ -10,6 +10,7 @@ import 'package:price_finder/features/search_image/models/vehicle_model_update.d
 import 'package:price_finder/utils/config_reader.dart';
 import 'package:price_finder/features/search_image/view/vehicle_page_view.dart';
 import 'package:price_finder/utils/global_context_service.dart';
+import 'package:price_finder/features/search_image/view/search_view.dart';
 
 class SearchImageController extends ControllerMVC {
   factory SearchImageController([StateMVC? state]) =>
@@ -109,5 +110,9 @@ class SearchImageController extends ControllerMVC {
     final context = GlobalContextService.navigatorKey.currentContext!;
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => VehiclePage(image: image)));
    }
+
+  Widget loadSearchView(File image) {
+    return SearchView(image: image);
+  }
   
 }

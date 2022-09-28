@@ -48,9 +48,7 @@ class _VehiclePageState extends State<VehiclePage> {
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return SearchView(
-                  image: widget.image,
-                );
+                return searchImageController.loadSearchView(widget.image);
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
@@ -60,56 +58,52 @@ class _VehiclePageState extends State<VehiclePage> {
                   return Container(
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
-                        gradient: gd.RadialGradient(
-                            center: Alignment(0, -0.1),
-                            radius: 1,
-                            colors: <Color>[
+                      gradient: gd.RadialGradient(
+                        center: Alignment(0, -0.1),
+                        radius: 1,
+                        colors: <Color>[
                           Color.fromARGB(223, 2, 22, 51),
                           Color.fromARGB(223, 1, 7, 26),
-                        ])),
+                        ],
+                      ),
+                    ),
                     child: Column(
                       children: [
                         const SizedBox(
                           height: 60,
                         ),
-                        Container(
-                          width: 310,
-                          height: 310,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: FileImage(widget.image),
-                                fit: BoxFit.cover),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 24, 149, 187),
-                              width: 10,
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              height: 335,
+                              width: 335,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromARGB(141, 48, 141, 223),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(141, 48, 141, 223),
+                                    blurRadius: 10.0,
+                                    spreadRadius: 5.0,
+                                  ),
+                                ],
+                              ),
                             ),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.green,
-                                blurRadius: 10.0,
-                                spreadRadius: 0.0,
-                              )
-                            ],
-                          ),
+                            Container(
+                              width: 310,
+                              height: 310,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: FileImage(widget.image),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                          ],
                         ),
-
-                        // Container(
-                        //   width: 700,
-                        //   decoration: BoxDecoration(
-                        //     shape: BoxShape.circle,
-                        //     border: Border.all(
-                        //       color: Colors.red,
-                        //       width: 10,
-                        //     )
-                        //   ),
-                        //   child: CircleAvatar(
-                        //     radius: 150,
-                        //     backgroundImage: FileImage(widget.image),
-                        //   ),
-                        // ),
                         Padding(
-                          padding: const EdgeInsets.all(45.0),
+                          padding: const EdgeInsets.fromLTRB(0, 75, 0, 20),
                           child: Text(
                             searchImageController.getModel(),
                             // snapshot.data!.model,
@@ -117,12 +111,12 @@ class _VehiclePageState extends State<VehiclePage> {
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 59, 77, 85),
+                              color: Color.fromARGB(255, 215, 243, 255),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(1.0),
+                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                           child: Text(
                             searchImageController.getPriceFromModel(),
                             // snapshot.data!.price,
@@ -130,10 +124,10 @@ class _VehiclePageState extends State<VehiclePage> {
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 59, 77, 85),
+                              color: Color.fromARGB(255, 215, 243, 255),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -145,75 +139,6 @@ class _VehiclePageState extends State<VehiclePage> {
             }
           },
         ),
-      ),
-    );
-  }
-}
-
-
-class SearchView extends StatefulWidget {
-  final File image;
-  SearchView({Key? key, required this.image}) : super(key: key);
-
-  @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: const BoxDecoration(
-          gradient: gd.RadialGradient(
-              center: Alignment(0, -0.1),
-              radius: 1,
-              colors: <Color>[
-            Color.fromARGB(223, 2, 22, 51),
-            Color.fromARGB(223, 1, 7, 26),
-          ])),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 60,
-            width: 60,
-          ),
-          Stack(alignment: Alignment.center, children: [
-            const SizedBox(
-              height: 520,
-              width: 450,
-              // width: 380,
-              child: RiveAnimation.asset(
-                  'assets/ui_elements/search_loader_breathing.riv'),
-            ),
-            const SizedBox(
-              height: 241,
-              width: 241,
-              // width: 380,
-              child:
-                  RiveAnimation.asset('assets/ui_elements/search_loader.riv'),
-            ),
-            Container(
-              width: 210,
-              height: 210,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: FileImage(widget.image), fit: BoxFit.cover),
-              ),
-            ),
-          ]),
-          const SizedBox(
-            height: 50,
-            width: 50,
-          ),
-          const Text('Beta version could take up to 40 seconds due to server limitations.',
-          style: TextStyle(
-            color: Color.fromARGB(157, 173, 212, 248),
-            fontSize: 12,
-            fontStyle: FontStyle.italic,
-          ),)
-        ], 
       ),
     );
   }
