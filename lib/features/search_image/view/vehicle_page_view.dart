@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:price_finder/features/search_image/controller/search_image_controller.dart';
-import 'package:rive/rive.dart';
+// import 'package:rive/rive.dart';
 import 'package:flutter/src/painting/gradient.dart' as gd;
 // import '../../search_image/models/vehicle_model.dart';
 
@@ -30,9 +30,7 @@ class _VehiclePageState extends State<VehiclePage> {
   @override
   void initState() {
     super.initState();
-    // vehicle = getVehicleInfo(widget.image);
     success = searchImageController.getVehicleInfo(widget.image);
-    // dum = predictImage(widget.image);
   }
 
   @override
