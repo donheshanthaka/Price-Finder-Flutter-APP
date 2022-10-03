@@ -6,14 +6,14 @@ import 'package:flutter/src/painting/gradient.dart' as gd;
 
 import '../features/select_image/controller/image_controller.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreenView extends StatefulWidget {
+  const HomeScreenView({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreenView> createState() => _HomeScreenViewState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenViewState extends State<HomeScreenView> {
   final ImageController imageController = ImageController();
   late RiveAnimationController _searchButtonController;
   late RiveAnimationController _searchLoaderController;
