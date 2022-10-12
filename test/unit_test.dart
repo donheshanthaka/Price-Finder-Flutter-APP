@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:price_finder/features/search_image/models/vehicle_model_update.dart';
 
+
 void main() {
   Vehicle vehicle =  Vehicle();
   setUp(() {
