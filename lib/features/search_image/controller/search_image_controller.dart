@@ -103,7 +103,7 @@ class SearchImageController extends ControllerMVC {
   }
 
   String getPriceFromModel(){
-    return vehicle.getprice();
+    return vehicle.getPrice();
   }
 
   loadVehiclePage(File image){

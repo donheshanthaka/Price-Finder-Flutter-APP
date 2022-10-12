@@ -13,7 +13,7 @@ class Vehicle {
     return model;
   }
 
-  String getprice(){
+  String getPrice(){
     return price;
   }
 
