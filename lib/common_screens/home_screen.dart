@@ -53,12 +53,20 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double heightFullScreen = MediaQuery.of(context).size.height;
+    var padding = MediaQuery.of(context).viewPadding;
+    double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
+    print(width);
+    print(heightAdjusted);
     return Scaffold(
       appBar: AppBar(
         title: const Text('PRICE - FINDER', style: TextStyle(fontFamily: 'Chandstate')),
         centerTitle: true,
       ),
       body: Container(
+        height: heightAdjusted,
+        width:  width,
         decoration: const BoxDecoration(
             gradient: gd.RadialGradient(
                 center: Alignment(0, -0.1),
@@ -86,21 +94,21 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               // ),
               // const Text('Tap to search',
               // ),
-              const SizedBox(
-                height: 150,
+              SizedBox(
+                height: heightAdjusted / 6 ,
               ),
-
+      
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  Container(
-                    width: 300,
-                    height: 300,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      // color: Colors.green,
-                    ),
-                  ),
+                  // Container(
+                  //   width: 300,
+                  //   height: 300,
+                  //   decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     // color: Colors.green,
+                  //   ),
+                  // ),
                   Container(
                     width: 470,
                     height: 470,
@@ -119,6 +127,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     child: Container(
                       width: 200,
                       height: 200,
+                      key: const Key("SearchButton"),
                       // margin: EdgeInsets.all(2),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
