@@ -57,8 +57,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     double heightFullScreen = MediaQuery.of(context).size.height;
     var padding = MediaQuery.of(context).viewPadding;
     double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
-    print(width);
-    print(heightAdjusted);
     return Scaffold(
       appBar: AppBar(
         title: const Text('PRICE - FINDER', style: TextStyle(fontFamily: 'Chandstate')),

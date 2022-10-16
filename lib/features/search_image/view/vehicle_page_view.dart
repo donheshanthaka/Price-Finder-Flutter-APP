@@ -130,7 +130,8 @@ class _VehiclePageState extends State<VehiclePage> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
+                  // return Text("${snapshot.error}");
+                  return searchImageController.loadErrorScreen("${snapshot.error}");
                 } else {
                   return const Text("No Data");
                 }

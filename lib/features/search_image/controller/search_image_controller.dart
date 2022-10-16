@@ -11,6 +11,7 @@ import 'package:price_finder/utils/config_reader.dart';
 import 'package:price_finder/features/search_image/view/vehicle_page_view.dart';
 import 'package:price_finder/utils/global_context_service.dart';
 import 'package:price_finder/features/search_image/view/search_view.dart';
+import 'package:price_finder/common_screens/error_screen.dart';
 
 class SearchImageController extends ControllerMVC {
   factory SearchImageController([StateMVC? state]) =>
@@ -113,6 +114,10 @@ class SearchImageController extends ControllerMVC {
 
   Widget loadSearchView(File image) {
     return SearchView(image: image);
+  }
+
+  Widget loadErrorScreen(String error){
+    return ErrorScreen(error: error);
   }
   
 }
