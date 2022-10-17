@@ -37,7 +37,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
           const SizedBox(
             height: 55,
           ),
-          Padding (
+          Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
               widget.error,
