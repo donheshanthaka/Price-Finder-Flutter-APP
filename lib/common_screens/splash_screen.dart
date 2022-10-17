@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:price_finder/common_screens/home_screen.dart';
 import 'package:rive/rive.dart';
-
 import 'package:flutter/src/painting/gradient.dart' as gd;
+import 'package:price_finder/common_screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,11 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => HomeScreenView(),
+          builder: (_) => const HomeScreenView(),
         ),
       ),
     );
@@ -39,11 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
               Color.fromARGB(223, 2, 22, 51),
               Color.fromARGB(223, 1, 7, 26),
             ])),
-        child: Center(
-          child: Container(
+        child: const Center(
+          child: SizedBox(
             width: 400,
-            child: const RiveAnimation.asset(
-                'assets/splash_screen/price_finder.riv'),
+            child:
+                RiveAnimation.asset('assets/splash_screen/splash_screen.riv'),
           ),
         ),
       ),

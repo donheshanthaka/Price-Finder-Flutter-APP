@@ -76,7 +76,7 @@ flutter:
   assets:
     - assets/config/app_config_dev.json
     - assets/config/app_config_prod.json
-    - assets/splash_screen/price_finder.riv
+    - assets/splash_screen/splash_screen.riv
     - assets/buttons/search_button.riv
     - assets/buttons/search_button_background.riv
     - assets/ui_elements/search_loader.riv
