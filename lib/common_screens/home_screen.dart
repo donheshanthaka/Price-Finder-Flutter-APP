@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-
 import 'package:flutter/src/painting/gradient.dart' as gd;
+import 'package:price_finder/features/select_image/controller/image_controller.dart';
 
-import '../features/select_image/controller/image_controller.dart';
-
-class HomeScreenView extends StatefulWidget {
-  const HomeScreenView({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreenView> createState() => _HomeScreenViewState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenViewState extends State<HomeScreenView> {
+class _HomeScreenState extends State<HomeScreen> {
   final ImageController imageController = ImageController();
   late RiveAnimationController _searchButtonController;
   late RiveAnimationController _searchLoaderController;
@@ -31,8 +29,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     );
   }
 
-  void _searchLoaderFunction(RiveAnimationController controller){
-    if(controller.isActive == false){
+  void _searchLoaderFunction(RiveAnimationController controller) {
+    if (controller.isActive == false) {
       controller.isActive = true;
     }
   }
@@ -59,62 +57,36 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PRICE - FINDER', style: TextStyle(fontFamily: 'Chandstate')),
+        title: const Text('PRICE - FINDER',
+            style: TextStyle(fontFamily: 'Chandstate')),
         centerTitle: true,
       ),
       body: Container(
         height: heightAdjusted,
-        width:  width,
+        width: width,
         decoration: const BoxDecoration(
-            gradient: gd.RadialGradient(
-                center: Alignment(0, -0.1),
-                radius: 1,
-                colors: <Color>[
+          gradient: gd.RadialGradient(
+            center: Alignment(0, -0.1),
+            radius: 1,
+            colors: <Color>[
               Color.fromARGB(223, 2, 22, 51),
               Color.fromARGB(223, 1, 7, 26),
-            ])),
+            ],
+          ),
+        ),
         child: Center(
           child: Column(
             children: [
-              // FloatingActionButton(
-              //   onPressed: () {
-              //     showCupertinoDialog(
-              //       context: context,
-              //       builder: (BuildContext context) {
-              //         return imageController.selectImageDialog();
-              //       },
-              //       barrierDismissible: true,
-              //     );
-              //   },
-              //   child: const Icon(Icons.search_rounded),
-              // ),
-              // const SizedBox(height: 100,
-              // ),
-              // const Text('Tap to search',
-              // ),
               SizedBox(
-                height: heightAdjusted / 6 ,
+                height: heightAdjusted / 6,
               ),
-      
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  // Container(
-                  //   width: 300,
-                  //   height: 300,
-                  //   decoration: const BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     // color: Colors.green,
-                  //   ),
-                  // ),
-                  Container(
+                  const SizedBox(
                     width: 470,
                     height: 470,
-                    // decoration: const BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     color: Colors.black
-                    //   ),
-                    child: const RiveAnimation.asset(
+                    child: RiveAnimation.asset(
                       'assets/buttons/search_button_background.riv',
                     ),
                   ),
@@ -126,7 +98,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       width: 200,
                       height: 200,
                       key: const Key("SearchButton"),
-                      // margin: EdgeInsets.all(2),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),

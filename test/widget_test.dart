@@ -31,7 +31,7 @@ void main() {
 
   testWidgets("Test search button", (WidgetTester tester) async {
     final searchButton = find.byKey(const ValueKey("SearchButton"));
-    await tester.pumpWidget(const MaterialApp(home: HomeScreenView()));
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
     await tester.pump();
     await tester.tap(searchButton);
     await tester.pump();
