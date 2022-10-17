@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-
-
 class ErrorScreen extends StatefulWidget {
-final String error;
-  ErrorScreen({Key? key, required this.error}) : super(key: key);
+  final String error;
+  const ErrorScreen({Key? key, required this.error}) : super(key: key);
 
   @override
   State<ErrorScreen> createState() => _ErrorScreenState();
@@ -27,7 +25,29 @@ class _ErrorScreenState extends State<ErrorScreen> {
       ),
       child: Column(
         children: [
-          Text(widget.error)
+          const SizedBox(
+            height: 125,
+          ),
+          SizedBox(
+            height: 250,
+            width: 250,
+            child: Image.asset(
+                'assets/ui_elements/error_icons/broken_search_icon.png'),
+          ),
+          const SizedBox(
+            height: 55,
+          ),
+          Padding (
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              widget.error,
+              style: const TextStyle(
+                color: Color.fromARGB(157, 173, 212, 248),
+                fontSize: 18,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
         ],
       ),
     );
