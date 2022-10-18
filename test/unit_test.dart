@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:price_finder/features/search_image/models/vehicle_model_update.dart';
+import 'package:price_finder/features/search_image/models/vehicle_model.dart';
 
 
 void main() {

@@ -1,14 +1,19 @@
-// Represents a vehicle that includes its model and current market price
 class Vehicle {
-  final String model;
-  final String price;
+  late String model;
+  late String price;
 
-  Vehicle({required this.model, required this.price});
+  Vehicle();
 
-  factory Vehicle.fromJson(Map<String, dynamic> json) {
-    return Vehicle(
-      model: json['model'] ?? "",
-      price: json['price'] ?? "",
-    );
+  void updateInfo(Map<String, dynamic> data) {
+    model = data['model'];
+    price = data['price'];
+  }
+
+  String getModel() {
+    return model;
+  }
+
+  String getPrice() {
+    return price;
   }
 }
