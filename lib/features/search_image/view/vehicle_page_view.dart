@@ -2,12 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:price_finder/features/search_image/controller/search_image_controller.dart';
-// import 'package:rive/rive.dart';
 import 'package:flutter/src/painting/gradient.dart' as gd;
-// import '../../search_image/models/vehicle_model.dart';
-
-
-
 
 class VehiclePage extends StatefulWidget {
   final File image;
@@ -18,14 +13,9 @@ class VehiclePage extends StatefulWidget {
 }
 
 class _VehiclePageState extends State<VehiclePage> {
-  
   final SearchImageController searchImageController = SearchImageController();
 
-  // late Future<Vehicle> vehicle;
-
   late Future<bool> success;
-
-  // late Future<List> dum;
 
   @override
   void initState() {
@@ -50,9 +40,6 @@ class _VehiclePageState extends State<VehiclePage> {
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
-                  // print(snapshot.data!.model);
-                  // print(snapshot.data!.price);
-                  // return SearchView(image: widget.image,);
                   return Container(
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
@@ -104,8 +91,6 @@ class _VehiclePageState extends State<VehiclePage> {
                           padding: const EdgeInsets.fromLTRB(0, 75, 0, 20),
                           child: Text(
                             searchImageController.getModel(),
-                            // snapshot.data!.model,
-                            //"Wagon R Stingray 2018",
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -117,8 +102,6 @@ class _VehiclePageState extends State<VehiclePage> {
                           padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                           child: Text(
                             searchImageController.getPriceFromModel(),
-                            // snapshot.data!.price,
-                            //"Rs. 6,000,000",
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -130,8 +113,8 @@ class _VehiclePageState extends State<VehiclePage> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  // return Text("${snapshot.error}");
-                  return searchImageController.loadErrorScreen("${snapshot.error}");
+                  return searchImageController
+                      .loadErrorScreen("${snapshot.error}");
                 } else {
                   return const Text("No Data");
                 }
