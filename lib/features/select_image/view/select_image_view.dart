@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:price_finder/features/select_image/controller/image_controller.dart';
 
-
 class SelectImageDialog extends StatefulWidget {
-  SelectImageDialog({Key? key}) : super(key: key);
+  const SelectImageDialog({Key? key}) : super(key: key);
 
   @override
   State<SelectImageDialog> createState() => _SelectImageDialogState();
@@ -21,7 +20,6 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
           navigator.pop(); // in case of error, put this below the getImage call
           final File? image = await imageController.getImage('camera');
           if (image != null) {
-            // navigator.push(MaterialPageRoute(builder: (context) => VehiclePage(image: image,)));
             imageController.callLoadVehiclePage(image);
           }
         });
@@ -32,8 +30,7 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
           final navigator = Navigator.of(context);
           navigator.pop(); // in case of error, put this below the getImage call
           final File? image = await imageController.getImage('gallery');
-          if (image != null){
-            // navigator.push(MaterialPageRoute(builder: (context) => VehiclePage(image: image,)));
+          if (image != null) {
             imageController.callLoadVehiclePage(image);
           }
         });
@@ -50,7 +47,3 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
     return _imageSourceAlertDialog(context);
   }
 }
-
-
-
-
