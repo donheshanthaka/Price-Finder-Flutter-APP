@@ -54,8 +54,7 @@ class _SearchViewState extends State<SearchView> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: FileImage(widget.image), 
-                      fit: BoxFit.cover),
+                      image: FileImage(widget.image), fit: BoxFit.cover),
                 ),
               ),
             ],
