@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter/src/painting/gradient.dart' as gd;
 import 'package:price_finder/features/select_image/controller/image_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -51,10 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double heightFullScreen = MediaQuery.of(context).size.height;
-    var padding = MediaQuery.of(context).viewPadding;
-    double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
+    // double width = MediaQuery.of(context).size.width;
+    // double heightFullScreen = MediaQuery.of(context).size.height;
+    // var padding = MediaQuery.of(context).viewPadding;
+    // double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
     return Scaffold(
       appBar: AppBar(
         title: const Text('PRICE - FINDER',
@@ -62,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: Container(
-        height: heightAdjusted,
-        width: width,
+        height: ScreenUtil().screenHeight,
+        width: ScreenUtil().screenWidth,
         decoration: const BoxDecoration(
           gradient: gd.RadialGradient(
             center: Alignment(0, -0.1),
@@ -78,15 +79,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: heightAdjusted / 6,
+                height: ScreenUtil().setHeight(400),
               ),
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  const SizedBox(
-                    width: 470,
-                    height: 470,
-                    child: RiveAnimation.asset(
+                  SizedBox(
+                    width: ScreenUtil().setWidth(1750),
+                    height: ScreenUtil().setHeight(1750),
+                    child: const RiveAnimation.asset(
                       'assets/buttons/search_button_background.riv',
                     ),
                   ),
@@ -95,8 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       _searchButtonController,
                     ),
                     child: Container(
-                      width: 200,
-                      height: 200,
+                      width: ScreenUtil().setWidth(750),
+                      height: ScreenUtil().setHeight(750),
                       key: const Key("SearchButton"),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
