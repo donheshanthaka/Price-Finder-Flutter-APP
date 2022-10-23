@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter/src/painting/gradient.dart' as gd;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchView extends StatefulWidget {
   final File image;
@@ -16,6 +17,8 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: ScreenUtil().screenHeight,
+      width: ScreenUtil().screenWidth,
       alignment: Alignment.center,
       decoration: const BoxDecoration(
         gradient: gd.RadialGradient(
@@ -29,28 +32,34 @@ class _SearchViewState extends State<SearchView> {
       ),
       child: Column(
         children: [
-          const SizedBox(
-            height: 60,
-            width: 60,
+          SizedBox(
+            height: ScreenUtil().setHeight(200),
+            width: ScreenUtil().setWidth(200),
           ),
           Stack(
             alignment: Alignment.center,
             children: [
-              const SizedBox(
-                height: 520,
-                width: 450,
-                child: RiveAnimation.asset(
+              SizedBox(
+                // height: 520,
+                // width: 450,
+                height: ScreenUtil().setHeight(1800),
+                width: ScreenUtil().setWidth(1800),
+                child: const RiveAnimation.asset(
                     'assets/ui_elements/search_loader_breathing.riv'),
               ),
-              const SizedBox(
-                height: 241,
-                width: 241,
+              SizedBox(
+                // height: 241,
+                // width: 241,
+                height: ScreenUtil().setHeight(900),
+                width: ScreenUtil().setWidth(900),
                 child:
-                    RiveAnimation.asset('assets/ui_elements/search_loader.riv'),
+                    const RiveAnimation.asset('assets/ui_elements/search_loader.riv'),
               ),
               Container(
-                width: 210,
-                height: 210,
+                // width: 210,
+                // height: 210,
+                height: ScreenUtil().setHeight(785),
+                width: ScreenUtil().setWidth(785),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
@@ -59,15 +68,18 @@ class _SearchViewState extends State<SearchView> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 50,
-            width: 50,
+          SizedBox(
+            // height: 50,
+            // width: 50,
+            height: ScreenUtil().setHeight(185),
+            width: ScreenUtil().setWidth(185),
           ),
-          const Text(
+          Text(
             'Beta version could take up to 40 seconds due to server limitations.',
             style: TextStyle(
-              color: Color.fromARGB(157, 173, 212, 248),
-              fontSize: 12,
+              color: const Color.fromARGB(157, 173, 212, 248),
+              fontSize: ScreenUtil().setSp(45),
+              // fontSize: (12),
               fontStyle: FontStyle.italic,
             ),
           ),
