@@ -58,8 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
     // double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PRICE - FINDER',
-            style: TextStyle(fontFamily: 'Chandstate')),
+        title: Text(
+          'PRICE - FINDER',
+          style: TextStyle(
+            fontFamily: 'Chandstate',
+            fontSize: ScreenUtil().setSp(76),
+          ),
+        ),
         centerTitle: true,
       ),
       body: Container(
