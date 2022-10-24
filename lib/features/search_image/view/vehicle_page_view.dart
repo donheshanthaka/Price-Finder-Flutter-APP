@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:price_finder/features/search_image/controller/search_image_controller.dart';
 import 'package:flutter/src/painting/gradient.dart' as gd;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VehiclePage extends StatefulWidget {
   final File image;
@@ -27,7 +28,11 @@ class _VehiclePageState extends State<VehiclePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vehicle'),
+        title: Text('Vehicle',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(76),
+          ),
+        ),
         centerTitle: true,
       ),
       body: Center(
@@ -41,6 +46,8 @@ class _VehiclePageState extends State<VehiclePage> {
               default:
                 if (snapshot.hasData) {
                   return Container(
+                    height: ScreenUtil().screenHeight,
+                    width: ScreenUtil().screenWidth,
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
                       gradient: gd.RadialGradient(
@@ -54,15 +61,18 @@ class _VehiclePageState extends State<VehiclePage> {
                     ),
                     child: Column(
                       children: [
-                        const SizedBox(
-                          height: 60,
+                        SizedBox(
+                          // height: 60,
+                          height: ScreenUtil().setHeight(210),
                         ),
                         Stack(
                           alignment: Alignment.center,
                           children: [
                             Container(
-                              height: 335,
-                              width: 335,
+                              // height: 335,
+                              // width: 335,
+                              height: ScreenUtil().setHeight(1245),
+                              width: ScreenUtil().setWidth(1245),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color.fromARGB(141, 48, 141, 223),
@@ -76,8 +86,10 @@ class _VehiclePageState extends State<VehiclePage> {
                               ),
                             ),
                             Container(
-                              width: 310,
-                              height: 310,
+                              // width: 310,
+                              // height: 310,
+                              height: ScreenUtil().setHeight(1150),
+                              width: ScreenUtil().setWidth(1150),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
@@ -88,24 +100,24 @@ class _VehiclePageState extends State<VehiclePage> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 75, 0, 20),
+                          padding: EdgeInsets.only(top: 280.h),
                           child: Text(
                             searchImageController.getModel(),
-                            style: const TextStyle(
-                              fontSize: 25,
+                            style: TextStyle(
+                              fontSize: ScreenUtil().setSp(93),
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 215, 243, 255),
+                              color: const Color.fromARGB(255, 215, 243, 255),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                          padding: EdgeInsets.only(top: 125.h),
                           child: Text(
                             searchImageController.getPriceFromModel(),
-                            style: const TextStyle(
-                              fontSize: 25,
+                            style: TextStyle(
+                              fontSize: ScreenUtil().setSp(93),
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 215, 243, 255),
+                              color: const Color.fromARGB(255, 215, 243, 255),
                             ),
                           ),
                         ),
@@ -113,10 +125,9 @@ class _VehiclePageState extends State<VehiclePage> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return searchImageController
-                      .loadErrorScreen("${snapshot.error}");
+                  return searchImageController.loadErrorScreen("${snapshot.error}");
                 } else {
-                  return const Text("No Data");
+                  return searchImageController.loadErrorScreen("No Data");
                 }
             }
           },
