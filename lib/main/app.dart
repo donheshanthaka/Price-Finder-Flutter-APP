@@ -14,18 +14,24 @@ class MyApp extends StatelessWidget {
       designSize: const Size(1440, 2960),
       builder: (context, child) {
         return MaterialApp(
-        navigatorKey: GlobalContextService.navigatorKey, // set property
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          appBarTheme: const AppBarTheme(
-            color: Color.fromARGB(255, 26, 41, 65),
+          navigatorKey: GlobalContextService.navigatorKey, // set property
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blueGrey,
+            appBarTheme: const AppBarTheme(
+              color: Color.fromARGB(255, 26, 41, 65),
+            ),
           ),
-        ),
-        home: const SplashScreen(),
-      );},
-      
-      
+          builder: (context, widget) {
+            return MediaQuery(
+              ///Setting font does not change with system font size
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: widget!,
+            );
+          },
+          home: const SplashScreen(),
+        );
+      },
     );
   }
 }
