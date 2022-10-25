@@ -74,13 +74,17 @@ class _SearchViewState extends State<SearchView> {
             height: ScreenUtil().setHeight(185),
             width: ScreenUtil().setWidth(185),
           ),
-          Text(
-            'Beta version could take up to 40 seconds due to server limitations.',
-            style: TextStyle(
-              color: const Color.fromARGB(157, 173, 212, 248),
-              fontSize: ScreenUtil().setSp(45),
-              // fontSize: (12),
-              fontStyle: FontStyle.italic,
+          Padding(
+            padding: EdgeInsets.only(left: 20.h, right: 20.h),
+            child: Text(
+              'Beta version could take up to 40 seconds due to server limitations.',
+              style: TextStyle(
+                color: const Color.fromARGB(157, 173, 212, 248),
+                fontSize: ScreenUtil().setSp(45),
+                // fontSize: (12),
+                fontStyle: FontStyle.italic,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ],
