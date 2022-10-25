@@ -52,10 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
-    // double heightFullScreen = MediaQuery.of(context).size.height;
-    // var padding = MediaQuery.of(context).viewPadding;
-    // double heightAdjusted = heightFullScreen - padding.top - kToolbarHeight;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -70,11 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         height: ScreenUtil().screenHeight,
         width: ScreenUtil().screenWidth,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: gd.RadialGradient(
-            center: Alignment(0, -0.1),
-            radius: 1,
-            colors: <Color>[
+            center: const Alignment(0, -0.1),
+            radius: 3.7.r,
+            colors: const <Color>[
               Color.fromARGB(223, 2, 22, 51),
               Color.fromARGB(223, 1, 7, 26),
             ],
