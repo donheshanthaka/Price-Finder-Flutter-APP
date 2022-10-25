@@ -96,7 +96,7 @@ class _VehiclePageState extends State<VehiclePage> {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 280.h),
+                          padding: EdgeInsets.only(top: 280.h, left: 40.h, right: 40.h),
                           child: Text(
                             searchImageController.getModel(),
                             style: TextStyle(
@@ -104,10 +104,11 @@ class _VehiclePageState extends State<VehiclePage> {
                               fontWeight: FontWeight.bold,
                               color: const Color.fromARGB(255, 215, 243, 255),
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 125.h),
+                          padding: EdgeInsets.only(top: 125.h, left: 40.h, right: 40.h),
                           child: Text(
                             searchImageController.getPriceFromModel(),
                             style: TextStyle(
@@ -115,6 +116,7 @@ class _VehiclePageState extends State<VehiclePage> {
                               fontWeight: FontWeight.bold,
                               color: const Color.fromARGB(255, 215, 243, 255),
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],
