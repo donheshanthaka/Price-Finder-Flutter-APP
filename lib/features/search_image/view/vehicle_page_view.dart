@@ -49,11 +49,11 @@ class _VehiclePageState extends State<VehiclePage> {
                     height: ScreenUtil().screenHeight,
                     width: ScreenUtil().screenWidth,
                     alignment: Alignment.center,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       gradient: gd.RadialGradient(
-                        center: Alignment(0, -0.1),
-                        radius: 1,
-                        colors: <Color>[
+                        center: const Alignment(0, -0.1),
+                        radius: 3.7.r,
+                        colors: const <Color>[
                           Color.fromARGB(223, 2, 22, 51),
                           Color.fromARGB(223, 1, 7, 26),
                         ],
