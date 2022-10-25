@@ -40,24 +40,18 @@ class _SearchViewState extends State<SearchView> {
             alignment: Alignment.center,
             children: [
               SizedBox(
-                // height: 520,
-                // width: 450,
                 height: ScreenUtil().setHeight(1800),
                 width: ScreenUtil().setWidth(1800),
                 child: const RiveAnimation.asset(
                     'assets/ui_elements/search_loader_breathing.riv'),
               ),
               SizedBox(
-                // height: 241,
-                // width: 241,
                 height: ScreenUtil().setHeight(900),
                 width: ScreenUtil().setWidth(900),
-                child:
-                    const RiveAnimation.asset('assets/ui_elements/search_loader.riv'),
+                child: const RiveAnimation.asset(
+                    'assets/ui_elements/search_loader.riv'),
               ),
               Container(
-                // width: 210,
-                // height: 210,
                 height: ScreenUtil().setHeight(785),
                 width: ScreenUtil().setWidth(785),
                 decoration: BoxDecoration(
@@ -69,8 +63,6 @@ class _SearchViewState extends State<SearchView> {
             ],
           ),
           SizedBox(
-            // height: 50,
-            // width: 50,
             height: ScreenUtil().setHeight(185),
             width: ScreenUtil().setWidth(185),
           ),
@@ -81,7 +73,6 @@ class _SearchViewState extends State<SearchView> {
               style: TextStyle(
                 color: const Color.fromARGB(157, 173, 212, 248),
                 fontSize: ScreenUtil().setSp(45),
-                // fontSize: (12),
                 fontStyle: FontStyle.italic,
               ),
               textAlign: TextAlign.center,
