@@ -28,7 +28,8 @@ class _VehiclePageState extends State<VehiclePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vehicle',
+        title: Text(
+          'Vehicle',
           style: TextStyle(
             fontSize: ScreenUtil().setSp(76),
           ),
@@ -62,15 +63,12 @@ class _VehiclePageState extends State<VehiclePage> {
                     child: Column(
                       children: [
                         SizedBox(
-                          // height: 60,
                           height: ScreenUtil().setHeight(210),
                         ),
                         Stack(
                           alignment: Alignment.center,
                           children: [
                             Container(
-                              // height: 335,
-                              // width: 335,
                               height: ScreenUtil().setHeight(1245),
                               width: ScreenUtil().setWidth(1245),
                               decoration: const BoxDecoration(
@@ -86,8 +84,6 @@ class _VehiclePageState extends State<VehiclePage> {
                               ),
                             ),
                             Container(
-                              // width: 310,
-                              // height: 310,
                               height: ScreenUtil().setHeight(1150),
                               width: ScreenUtil().setWidth(1150),
                               decoration: BoxDecoration(
@@ -125,7 +121,8 @@ class _VehiclePageState extends State<VehiclePage> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return searchImageController.loadErrorScreen("${snapshot.error}");
+                  return searchImageController
+                      .loadErrorScreen("${snapshot.error}");
                 } else {
                   return searchImageController.loadErrorScreen("No Data");
                 }
