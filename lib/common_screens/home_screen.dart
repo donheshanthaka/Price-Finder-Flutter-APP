@@ -80,14 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: ScreenUtil().setHeight(400),
+                height: ScreenUtil().setHeight(380),
               ),
               Stack(
                 alignment: Alignment.center,
                 children: [
                   SizedBox(
-                    width: ScreenUtil().setWidth(1750),
-                    height: ScreenUtil().setHeight(1750),
+                    width: ScreenUtil().setWidth(1820),
+                    height: ScreenUtil().setHeight(1820),
                     child: const RiveAnimation.asset(
                       'assets/buttons/search_button_background.riv',
                     ),
