@@ -46,14 +46,14 @@ class _SearchViewState extends State<SearchView> {
                     'assets/ui_elements/search_loader_breathing.riv'),
               ),
               SizedBox(
-                height: ScreenUtil().setHeight(900),
-                width: ScreenUtil().setWidth(900),
+                height: ScreenUtil().setHeight(850),
+                width: ScreenUtil().setWidth(850),
                 child: const RiveAnimation.asset(
                     'assets/ui_elements/search_loader.riv'),
               ),
               Container(
-                height: ScreenUtil().setHeight(785),
-                width: ScreenUtil().setWidth(785),
+                height: ScreenUtil().setHeight(740),
+                width: ScreenUtil().setWidth(740),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
