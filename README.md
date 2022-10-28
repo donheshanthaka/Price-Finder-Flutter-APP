@@ -15,6 +15,7 @@ Price Finder is a mobile application developed using Flutter framework to identi
 * Effectively handled exceptions to inform the user of on conflicting situations without crashing the program.
 * Comprehensive **UI/UX design** of the application to provide **seamless user experience** and interaction with **unique custom made graphics and animations**.
 * Implementation of **API calls** for the demanding computational tasks, thus reducing the performance requirements per device and **increasing the range of devices** capable of running the application without lags.
+* Implementation of **unit testing** and **widget testing** to guarantee the application performs its intended functionality.
 * **Modular project structure** according to industry standards which increases the scalability of the application with minimal breaking changes.
 * Integration of **environment configuration** to easily switch between development and production environments during development.
 
